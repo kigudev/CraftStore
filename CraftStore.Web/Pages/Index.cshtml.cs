@@ -1,5 +1,5 @@
 ﻿using CraftStore.Web.Models;
-using CraftStore.Web.Services;
+using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace CraftStore.Web.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly JsonFileProductService _productService;
+        private readonly IProductService _productService;
 
-        public IndexModel(ILogger<IndexModel> logger, JsonFileProductService jsonFileProductService)
+        public IndexModel(ILogger<IndexModel> logger, IProductService jsonFileProductService)
         {
             _logger = logger;
             _productService = jsonFileProductService;

@@ -1,4 +1,5 @@
 ﻿using CraftStore.Web.Models;
+using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 
-namespace CraftStore.Web.Services
+namespace CraftStore.Web.Services.Implementations
 {
-    public class JsonFileProductService
+    public class JsonFileProductService: IProductService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 

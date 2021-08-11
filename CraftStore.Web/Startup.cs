@@ -1,14 +1,13 @@
+using CraftStore.Web.Data;
 using CraftStore.Web.Services;
+using CraftStore.Web.Services.Implementations;
+using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CraftStore.Web
 {
@@ -26,7 +25,10 @@ namespace CraftStore.Web
         {
             services.AddRazorPages();
 
-            services.AddTransient<JsonFileProductService>();
+            //services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CraftStoreDb;Integrated Security=True"));
+            services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IProductService, JsonFileProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

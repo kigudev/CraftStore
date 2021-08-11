@@ -1,5 +1,6 @@
 using CraftStore.Web.Models;
 using CraftStore.Web.Services;
+using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,9 +8,9 @@ namespace CraftStore.Web.Pages
 {
     public class DetailsModel : PageModel
     {
-        private readonly JsonFileProductService _productService;
+        private readonly IProductService _productService;
 
-        public DetailsModel(JsonFileProductService productService)
+        public DetailsModel(IProductService productService)
         {
             _productService = productService;
         }
