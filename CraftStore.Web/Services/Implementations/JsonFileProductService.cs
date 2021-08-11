@@ -1,15 +1,15 @@
 ﻿using CraftStore.Web.Models;
 using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace CraftStore.Web.Services.Implementations
 {
-    public class JsonFileProductService: IProductService
+    public class JsonFileProductService : IProductService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -23,20 +23,25 @@ namespace CraftStore.Web.Services.Implementations
             get { return Path.Combine(_webHostEnvironment.WebRootPath, "data", "products.json"); }
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             // leer nuestro archivo de json
             using var jsonFileReader = File.OpenText(JsonFileName);
             // regresarlo en objeto de .net
-            return JsonSerializer.Deserialize<List<Product>>(jsonFileReader.ReadToEnd(), new JsonSerializerOptions
+            return await JsonSerializer.DeserializeAsync<List<Product>>(jsonFileReader.BaseStream, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
         }
 
-        public Product GetProduct(string id) => GetProducts().FirstOrDefault(c => c.Id == id);
+        public async Task<Product> GetProductAsync(string id)
+        {
+            var products = await GetProductsAsync();
+                
+            return products.FirstOrDefault(c => c.Id == id);
+        }
 
-        public IEnumerable<Product> GetMakerProducts(string name) => GetProducts().Where(c => c.Maker == name);
-
+        public async Task<IEnumerable<Product>> GetMakerProductsAsync(string name) => 
+            (await GetProductsAsync()).Where(c => c.Maker == name);
     }
 }

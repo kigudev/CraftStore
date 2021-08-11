@@ -1,12 +1,14 @@
 ﻿using CraftStore.Web.Data;
 using CraftStore.Web.Models;
 using CraftStore.Web.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CraftStore.Web.Services.Implementations
 {
-    public class DbProductService : IProductService
+    public class DbProductService : IDbProductService
     {
         private readonly ApplicationDbContext _context;
 
@@ -15,10 +17,29 @@ namespace CraftStore.Web.Services.Implementations
             _context = dbContext;
         }
 
-        public IEnumerable<Product> GetMakerProducts(string name) => _context.Products.Where(c => c.Maker == name);
+        public async Task<IEnumerable<Product>> GetMakerProductsAsync(string name) => 
+              await _context.Products.Where(c => c.Maker == name).ToListAsync();
 
-        public Product GetProduct(string id) => _context.Products.FirstOrDefault(c => c.Id == id);
+        public async Task<Product> GetProductAsync(string id) {
+            return await _context.Products.FirstOrDefaultAsync(c => c.Id == id);
+        }
 
-        public IEnumerable<Product> GetProducts() => _context.Products;
+        public async Task<IEnumerable<Product>> GetProductsAsync() {
+            return await _context.Products.ToListAsync();
+        }
+        public Task AddProduct(Product product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteProduct(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task UpdateProduct(Product product)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

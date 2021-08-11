@@ -24,9 +24,9 @@ namespace CraftStore.Web.Pages
 
         public IEnumerable<Product> Products { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Products = _productService.GetMakerProducts(Name);
+            Products = await _productService.GetMakerProductsAsync(Name);
         }
     }
 }

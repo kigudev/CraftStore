@@ -1,0 +1,27 @@
+﻿@page
+@model CraftStore.Web.Pages.NewProductModel
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Product.Maker"></label>
+        <input class="form-control" asp-for="Product.Maker" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Image"></label>
+        <input class="form-control" asp-for="Product.Image" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Url"></label>
+        <input class="form-control" asp-for="Product.Url"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Title"></label>
+        <input class="form-control" asp-for="Product.Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Description"></label>
+        <input class="form-control" asp-for="Product.Description" />
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+

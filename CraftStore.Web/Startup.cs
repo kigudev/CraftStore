@@ -25,10 +25,10 @@ namespace CraftStore.Web
         {
             services.AddRazorPages();
 
-            //services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CraftStoreDb;Integrated Security=True"));
             services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IProductService, DbProductService>();
+            services.AddTransient<IDbProductService, DbProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,14 +1,15 @@
 ﻿using CraftStore.Web.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CraftStore.Web.Services.Interfaces
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProductsAsync();
 
-        Product GetProduct(string id);
+        Task<Product> GetProductAsync(string id);
 
-        IEnumerable<Product> GetMakerProducts(string name);
+        Task<IEnumerable<Product>> GetMakerProductsAsync(string name);
     }
 }

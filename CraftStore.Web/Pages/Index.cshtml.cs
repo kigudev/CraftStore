@@ -3,6 +3,7 @@ using CraftStore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CraftStore.Web.Pages
 {
@@ -19,9 +20,9 @@ namespace CraftStore.Web.Pages
 
         public IEnumerable<Product> Products { get; private set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Products = _productService.GetProducts();
+            Products = await _productService.GetProductsAsync();
         }
     }
 }
