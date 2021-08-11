@@ -1,8 +1,15 @@
 ﻿@page "/details/{id}"
 @model CraftStore.Web.Pages.DetailsModel
 
-<h3>@Model.Product.Title</h3>
-<img src="@Model.Product.Image" class="img-fluid"/>
-<p>@Model.Product.Description</p>
-<p>Maker: @Model.Product.Maker</p>
-<p>Url: <a href="@Model.Product.Url">Link</a></p>
+@if (Model.Product != null)
+{
+    <h3>@Model.Product.Title</h3>
+    <img src="@Model.Product.Image" class="img-fluid" />
+    <p>@Model.Product.Description</p>
+    <p>Maker: @Model.Product.Maker</p>
+    <p>Url: <a href="@Model.Product.Url">Link</a></p>
+}
+else
+{
+    <p class="lead text-center">Product not found</p>
+}

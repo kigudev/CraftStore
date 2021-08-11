@@ -5,28 +5,39 @@
     @Model.Name
 </h3>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.Products)
-        {
-        <tr>
-            <td>
-                <img src="@product.Image" class="img-fluid"/>
-            </td>
-            <td>@product.Id</td>
-            <td>@product.Title</td>
-            <td>@product.Description</td>
-            <td><a href="@product.Url" target="_blank">Link</a></td>
-        </tr>
-        }
-    </tbody>
-</table>
+
+@if (Model.Products.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <img src="@product.Image" class="img-fluid" />
+                    </td>
+                    <td>@product.Id</td>
+                    <td>@product.Title</td>
+                    <td>@product.Description</td>
+                    <td><a href="@product.Url" target="_blank">Link</a></td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="lead text-center">There's no products for this maker</p>
+}
