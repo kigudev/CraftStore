@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+<div class="mb-3">
+    Filter by maker:
+
+    @foreach (var maker in Model.Products.Select(c => c.Maker).Distinct())
+    {
+        <a href="~/maker/@maker" class="mr-3">@maker</a>
+    }
+</div>
+<section class="card-columns">
+    @foreach (var product in Model.Products)
+    {
+        var bgColor = product.Maker == "jenlooper" ? "bg-info" : "";
+        <div class="card @bgColor">
+            <div class="card-body">
+                <b class="card-title">
+                    @product.Title
+                </b>
+                <div>Maker: @product.Maker</div>
+
+                <div class="mt-3 text-right">
+                    <a href="~/details/@product.Id" class="btn btn-primary">Detalles</a>
+                </div>
+            </div>
+        </div>
+    }
+</section>
