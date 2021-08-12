@@ -6,21 +6,26 @@ namespace CraftStore.Web.Models
 {
     public class Product
     {
+        [Required]
+        [StringLength(40, MinimumLength = 3)]
         public string Id { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(40)]
         [Required]
         public string Maker { get; set; }
 
         [JsonPropertyName("img")]
+        [Url]
         public string Image { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(100)]
         [Required]
+        [Url]
+        [Display(Name = "Site URL")]
         public string Url { get; set; }
 
-        [MaxLength(200)]
         [Required]
+        [StringLength(100, MinimumLength = 3)]
         public string Title { get; set; }
 
         [MaxLength(1000)]

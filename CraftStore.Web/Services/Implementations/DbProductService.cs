@@ -27,19 +27,37 @@ namespace CraftStore.Web.Services.Implementations
         public async Task<IEnumerable<Product>> GetProductsAsync() {
             return await _context.Products.ToListAsync();
         }
-        public Task AddProduct(Product product)
+        public async Task AddProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            await _context.AddAsync(product);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteProduct(int id)
+        public async Task DeleteProductAsync(string id)
         {
-            throw new System.NotImplementedException();
+            var product = await _context.Products.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (product == null)
+                return;
+
+            _context.Remove(product);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateProduct(Product product)
+        public async Task UpdateProductAsync(Product newProduct)
         {
-            throw new System.NotImplementedException();
+            var product = await _context.Products.FirstOrDefaultAsync(c => c.Id == newProduct.Id);
+
+            if (product == null)
+                return;
+
+            product.Maker = newProduct.Maker;
+            product.Url = newProduct.Url;
+            product.Image = newProduct.Image;
+            product.Title = newProduct.Title;
+            product.Description = newProduct.Description;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

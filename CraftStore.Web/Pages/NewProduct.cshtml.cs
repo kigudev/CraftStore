@@ -26,7 +26,7 @@ namespace CraftStore.Web.Pages
 
         public async Task OnPostAsync()
         {
-            await _productService.AddProduct(Product);
+            await _productService.AddProductAsync(Product);
         }
     }
 }

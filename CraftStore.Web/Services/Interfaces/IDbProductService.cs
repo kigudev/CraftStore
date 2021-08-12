@@ -5,10 +5,10 @@ namespace CraftStore.Web.Services.Interfaces
 {
     public interface IDbProductService : IProductService
     {
-        Task AddProduct(Product product);
+        Task AddProductAsync(Product product);
 
-        Task UpdateProduct(Product product);
+        Task UpdateProductAsync(Product product);
 
-        Task DeleteProduct(int id);
+        Task DeleteProductAsync(string id);
     }
 }
