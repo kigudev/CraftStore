@@ -10,23 +10,49 @@
     </div>
     <div class="form-group">
         <label asp-for="Product.Maker"></label>
-        <input class="form-control" asp-for="Product.Maker" />
+        <select asp-for="Product.Maker" class="form-control">
+            <option>Nestle</option>
+            <option>Kellogs</option>
+            <option>Lala</option>
+            <option>Otro</option>
+        </select>
+        @*<input class="form-control" asp-for="Product.Maker" />*@
         <span asp-validation-for="Product.Maker" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Product.Image"></label>
-        <input class="form-control" asp-for="Product.Image" />
+        <input class="form-control" asp-for="Product.Image"/>
         <span asp-validation-for="Product.Image" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Product.Url"></label>
-        <input class="form-control" asp-for="Product.Url" />
+        <label>Url</label>
+        @* Los radios solo son para la selección de un solo elemento y los checkboxes se permiten varios, por lo tanto, 
+            si usamos checboxes hay que tener una propiedad de tipo arreglo o lista de strings para que podamos enlazar sus valores*@
+        <div class="form-check">
+            <input asp-for="Product.Url" type="radio" value="http://google.com" id="ProductUrl1" class="form-check-input" />
+            <label class="form-check-label" for="ProductUrl1">
+                http://google.com
+            </label>
+        </div>
+        <div class="form-check">
+            <input asp-for="Product.Url" type="radio" value="http://yahoo.com" id="ProductUrl2" class="form-check-input" />
+            <label class="form-check-label" for="ProductUrl2">
+                http://yahoo.com
+            </label>
+        </div>
+        <div class="form-check">
+            <input asp-for="Product.Url" type="radio" value="http://msn.com" id="ProductUrl3" class="form-check-input" />
+            <label class="form-check-label" for="ProductUrl3">
+                http://msn.com
+            </label>
+        </div>
+        @*<input class="form-control" asp-for="Product.Url" />*@
         <span asp-validation-for="Product.Url" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Product.Title"></label>
         <input class="form-control" asp-for="Product.Title" />
-        <span asp-validation-for="Product.Title"class="text-danger"></span>
+        <span asp-validation-for="Product.Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Product.Description"></label>
@@ -35,4 +61,3 @@
     </div>
     <button class="btn btn-primary" type="submit">Save</button>
 </form>
-

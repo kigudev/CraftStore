@@ -4,6 +4,10 @@
 @if (Model.Product != null)
 {
     <h3>@Model.Product.Title</h3>
+    <a href="~/editproduct/@Model.Product.Id" class="btn btn-outline-primary">Edit</a>
+    <form method="post">
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+    </form>
     <img src="@Model.Product.Image" class="img-fluid" />
     <p>@Model.Product.Description</p>
     <p>Maker: @Model.Product.Maker</p>

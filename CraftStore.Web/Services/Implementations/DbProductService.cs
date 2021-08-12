@@ -27,6 +27,11 @@ namespace CraftStore.Web.Services.Implementations
         public async Task<IEnumerable<Product>> GetProductsAsync() {
             return await _context.Products.ToListAsync();
         }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            return _context.Products.ToList();
+        }
         public async Task AddProductAsync(Product product)
         {
             await _context.AddAsync(product);
@@ -59,5 +64,7 @@ namespace CraftStore.Web.Services.Implementations
 
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

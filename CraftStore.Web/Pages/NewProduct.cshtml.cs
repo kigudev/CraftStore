@@ -24,9 +24,27 @@ namespace CraftStore.Web.Pages
         {
         }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
-            await _productService.AddProductAsync(Product);
+            if (ModelState.IsValid)
+            {
+                // hay que validar si el id ya está repetido en la base de datos
+                // si no va a tirar una excepción de conflicto de llaves
+                var products = await _productService.GetProductsAsync();
+                if(products.Any(c => c.Id == Product.Id))
+                {
+                    ModelState.AddModelError(string.Empty, "El Id ya está siendo usado");
+                    return Page();
+                }
+
+                await _productService.AddProductAsync(Product);
+                return RedirectToPage("/index");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Hay datos inválidos en tu información");
+                return Page();
+            }
         }
     }
 }
